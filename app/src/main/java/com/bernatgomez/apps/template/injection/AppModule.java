@@ -16,27 +16,32 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
+ * General application dagger component impl
+ *
  * Created by bernatgomez on 27/08/2017.
  */
-
 @Module
 public class AppModule {
 
+    @Singleton
     @Provides
     public IDataUsecase provideDataUsecase(Bus bus, RestDataSource data) {
         return new DataUsecaseImpl(bus, data);
     }
 
+    @Singleton
     @Provides
     public RestDataSource provideDataSource(Bus bus, Retrofit retrofit) {
         return new RestDataSource(bus, retrofit);
     }
 
+    @Singleton
     @Provides
     public Bus provideBus() {
         return new Bus(ThreadEnforcer.MAIN);
     }
 
+    @Singleton
     @Provides
     public OkHttpClient provideClient() {
         final int POOL_SIZE = 1;
@@ -49,8 +54,8 @@ public class AppModule {
         return client;
 
         /*
-        *
-        *         final int POOL_SIZE = 1;
+
+        final int POOL_SIZE = 1;
         final int TIMEOUT = 30 * 1000;
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
 
@@ -75,10 +80,11 @@ public class AppModule {
         OkHttpClient client = clientBuilder.build();
 
         return client;
-        * */
+        */
 
     }
 
+    @Singleton
     @Provides
     public Retrofit provideRetrofit(OkHttpClient client) {
         Retrofit retro =

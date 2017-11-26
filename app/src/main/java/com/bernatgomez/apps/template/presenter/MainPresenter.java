@@ -37,7 +37,7 @@ public class MainPresenter extends BasePresenter {
     }
 
     @Subscribe
-    public void onDataReceived(Integer data) {
+    public void onDataReceived(Float data) {
         this.view.hideLoading();
     }
 

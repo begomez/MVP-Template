@@ -23,7 +23,7 @@ public class DataUsecaseImpl extends BaseUsecase implements IDataUsecase {
 
     @Subscribe
     public void onDataReceived(Integer data) {
-        this.bus.post(data);
+        this.bus.post(new Float(data));
 
         this.bus.unregister(this);
     }
